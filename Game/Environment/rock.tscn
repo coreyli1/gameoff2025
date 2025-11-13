@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5congckvc6ha"]
+
+[ext_resource type="Texture2D" uid="uid://dew5d7qtq1rjw" path="res://Assets/Tileset/rock.png" id="1_dmq26"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cvwed"]
+size = Vector2(14, 16)
+
+[node name="Rock" type="StaticBody2D" groups=["environment"]]
+scale = Vector2(4, 4)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_dmq26")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_cvwed")

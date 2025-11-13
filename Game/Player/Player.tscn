@@ -1,0 +1,138 @@
+[gd_scene load_steps=17 format=3 uid="uid://8acr486elffe"]
+
+[ext_resource type="Script" uid="uid://bqxrxcwqdg44r" path="res://Game/Player/player.gd" id="1_3qydi"]
+[ext_resource type="Texture2D" uid="uid://lho2oi2abv00" path="res://Assets/Quirrel, The Knight - atlas0 #513018.png" id="3_2nirr"]
+[ext_resource type="Texture2D" uid="uid://bsnqqnr3sahla" path="res://Assets/Link/Link_anim.png" id="3_fd82q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q3lat"]
+size = Vector2(151, 155)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fd82q"]
+radius = 111.01801
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2nirr"]
+atlas = ExtResource("3_fd82q")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kt3un"]
+atlas = ExtResource("3_fd82q")
+region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o2hno"]
+atlas = ExtResource("3_2nirr")
+region = Rect2(0, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_65y41"]
+atlas = ExtResource("3_2nirr")
+region = Rect2(64, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hf5e6"]
+atlas = ExtResource("3_2nirr")
+region = Rect2(128, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fd82q"]
+atlas = ExtResource("3_fd82q")
+region = Rect2(32, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e0asf"]
+atlas = ExtResource("3_fd82q")
+region = Rect2(48, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfkwu"]
+atlas = ExtResource("3_fd82q")
+region = Rect2(64, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1khw3"]
+atlas = ExtResource("3_fd82q")
+region = Rect2(80, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_86ark"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2nirr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kt3un")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o2hno")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_65y41")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hf5e6")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fd82q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e0asf")
+}],
+"loop": true,
+"name": &"side",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sfkwu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1khw3")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4672b"]
+size = Vector2(159, 160)
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+z_index = 1
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_3qydi")
+speed = 800.0
+shoot_cooldown = 0.7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5.5, 0.5)
+shape = SubResource("RectangleShape2D_q3lat")
+
+[node name="Muzzle" type="Marker2D" parent="."]
+
+[node name="Hurtbox" type="Area2D" parent="."]
+
+[node name="hurtbox" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_fd82q")
+
+[node name="Frames" type="AnimatedSprite2D" parent="."]
+position = Vector2(1.0000038, 1.0000038)
+scale = Vector2(9.6875, 9.6875)
+sprite_frames = SubResource("SpriteFrames_86ark")
+animation = &"side"
+
+[node name="Dashbox" type="Area2D" parent="." groups=["player"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dashbox"]
+position = Vector2(6.5, 1)
+shape = SubResource("RectangleShape2D_4672b")
+
+[connection signal="body_entered" from="Dashbox" to="." method="_on_dashbox_body_entered"]

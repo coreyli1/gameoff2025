@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://0wmmyuqffndd"]
+
+[ext_resource type="Texture2D" uid="uid://03fyc853yubo" path="res://Assets/Tileset/breakablerock.png" id="1_7yb3g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dcltl"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l8rqu"]
+size = Vector2(16, 18)
+
+[node name="BreakableRock" type="StaticBody2D" groups=["environment"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_dcltl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_7yb3g")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_l8rqu")

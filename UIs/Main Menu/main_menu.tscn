@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://taoiq2nrph33"]
+
+[ext_resource type="Script" uid="uid://plsjggjlhry2" path="res://UIs/Main Menu/main_menu.gd" id="1_3vcrt"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3vcrt")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 105.0
+offset_right = 667.0
+offset_bottom = 193.0
+theme_override_font_sizes/font_size = 64
+text = "PRISM SHOOTER"
+
+[node name="Start Game" type="Button" parent="."]
+layout_mode = 0
+offset_left = 365.0
+offset_top = 317.0
+offset_right = 461.0
+offset_bottom = 348.0
+text = "Start Game
+"
+
+[node name="Exit Game" type="Button" parent="."]
+layout_mode = 0
+offset_left = 374.0
+offset_top = 406.0
+offset_right = 461.0
+offset_bottom = 437.0
+text = "Exit Game
+"
+
+[connection signal="pressed" from="Start Game" to="." method="_on_start_game_pressed"]

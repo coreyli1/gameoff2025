@@ -1,0 +1,113 @@
+[gd_scene load_steps=7 format=3 uid="uid://s22k54vkf7w6"]
+
+[ext_resource type="Texture2D" uid="uid://cas2slmxcsj4x" path="res://Assets/Extremely fast dungeon mock.jpg" id="2_6uqi0"]
+[ext_resource type="PackedScene" uid="uid://8acr486elffe" path="res://Game/Player/Player.tscn" id="3_6uqi0"]
+[ext_resource type="PackedScene" uid="uid://0wmmyuqffndd" path="res://Game/Environment/breakable_rock.tscn" id="4_ppyta"]
+[ext_resource type="PackedScene" uid="uid://b5congckvc6ha" path="res://Game/Environment/rock.tscn" id="5_ykrsh"]
+
+[sub_resource type="GDScript" id="GDScript_ppyta"]
+script/source = "extends Node2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	DisplayServer.window_set_size(Vector2i(1920, 1080))
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+
+#820 515
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6uqi0"]
+size = Vector2(3348, 186.99991)
+
+[node name="test" type="Node2D"]
+script = SubResource("GDScript_ppyta")
+
+[node name="Area2D" type="StaticBody2D" parent="."]
+position = Vector2(785, 218)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(896, -121.49993)
+rotation = -3.1415925
+shape = SubResource("RectangleShape2D_6uqi0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2570.25, 1635.5)
+scale = Vector2(1.5319308, 1.5725962)
+texture = ExtResource("2_6uqi0")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(2624, 4817)
+scale = Vector2(1.5319308, 1.5725962)
+texture = ExtResource("2_6uqi0")
+
+[node name="Sprite2D6" type="Sprite2D" parent="."]
+position = Vector2(-2083.9995, 1671)
+scale = Vector2(1.5319308, 1.5725962)
+texture = ExtResource("2_6uqi0")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(7261, 4901)
+scale = Vector2(1.5319308, 1.5725962)
+texture = ExtResource("2_6uqi0")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(12808, 4913)
+scale = Vector2(1.5319308, 1.5725962)
+texture = ExtResource("2_6uqi0")
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+position = Vector2(12006.001, 4933.9995)
+scale = Vector2(1.5319308, 1.5725962)
+texture = ExtResource("2_6uqi0")
+
+[node name="Player" parent="." instance=ExtResource("3_6uqi0")]
+position = Vector2(2452, 416)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="BreakableRock" parent="." instance=ExtResource("4_ppyta")]
+position = Vector2(1571, 1468)
+scale = Vector2(8, 8)
+
+[node name="Rock" parent="." instance=ExtResource("5_ykrsh")]
+position = Vector2(1575, 1720)
+scale = Vector2(8, 8)
+
+[node name="Rock2" parent="." instance=ExtResource("5_ykrsh")]
+position = Vector2(1579, 1955)
+scale = Vector2(8, 8)
+
+[node name="Rock3" parent="." instance=ExtResource("5_ykrsh")]
+position = Vector2(1590, 2194)
+scale = Vector2(8, 8)
+
+[node name="Rock4" parent="." instance=ExtResource("5_ykrsh")]
+position = Vector2(1596, 2422)
+scale = Vector2(8, 8)
+
+[node name="Rock5" parent="." instance=ExtResource("5_ykrsh")]
+position = Vector2(1607, 2644)
+scale = Vector2(8, 8)
+
+[node name="Rock6" parent="." instance=ExtResource("5_ykrsh")]
+position = Vector2(1579, 409)
+scale = Vector2(8, 8)
+
+[node name="Rock7" parent="." instance=ExtResource("5_ykrsh")]
+position = Vector2(1579, 667)
+scale = Vector2(8, 8)
+
+[node name="Rock8" parent="." instance=ExtResource("5_ykrsh")]
+position = Vector2(1575, 921)
+scale = Vector2(8, 8)
+
+[node name="Rock9" parent="." instance=ExtResource("5_ykrsh")]
+position = Vector2(1571, 1187)
+scale = Vector2(8, 8)

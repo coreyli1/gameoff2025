@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://c4gi6ww8x6oj"]
+
+[ext_resource type="Script" uid="uid://dtlhld774grxf" path="res://Game/Enemy/BigSludge/BigSludgeController.gd" id="1_enwat"]
+[ext_resource type="Texture2D" uid="uid://x5r3wj8qry7k" path="res://Assets/enemy.png" id="2_bgdsn"]
+[ext_resource type="Script" uid="uid://b6d47qh0g0tvr" path="res://Game/Enemy/EnemyComponents/WanderBehavior.gd" id="3_50sk0"]
+[ext_resource type="Script" uid="uid://bq04hfcsmk023" path="res://Game/Enemy/EnemyComponents/ChaseBehavior.gd" id="4_gj3ie"]
+[ext_resource type="Script" uid="uid://f01h6ibumxcy" path="res://Game/Enemy/EnemyComponents/EnemyStats.gd" id="5_nixnc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_epr5s"]
+size = Vector2(44.375, 43.375)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_83l4y"]
+radius = 119.03781
+
+[node name="Enemy" type="CharacterBody2D" groups=["enemies"]]
+position = Vector2(16, 16)
+script = ExtResource("1_enwat")
+
+[node name="Hitbox" type="CollisionShape2D" parent="." groups=["enemies"]]
+position = Vector2(-16.1875, -16.6875)
+shape = SubResource("RectangleShape2D_epr5s")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-16.000002, -16.000002)
+scale = Vector2(0.6953125, 0.6953125)
+texture = ExtResource("2_bgdsn")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+position = Vector2(1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+position = Vector2(-17, -17)
+shape = SubResource("CircleShape2D_83l4y")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="WanderBehavior" type="Node" parent="."]
+script = ExtResource("3_50sk0")
+metadata/_custom_type_script = "uid://b6d47qh0g0tvr"
+
+[node name="ChaseBehavior" type="Node" parent="."]
+script = ExtResource("4_gj3ie")
+metadata/_custom_type_script = "uid://bq04hfcsmk023"
+
+[node name="EnemyStats" type="Node" parent="."]
+script = ExtResource("5_nixnc")
+speed = 30.0
+metadata/_custom_type_script = "uid://f01h6ibumxcy"
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_zone_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_zone_body_exited"]
