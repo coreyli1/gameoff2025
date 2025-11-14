@@ -8,7 +8,7 @@
 size = Vector2(151, 155)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fd82q"]
-radius = 111.01801
+radius = 79.025314
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2nirr"]
 atlas = ExtResource("3_fd82q")
@@ -129,10 +129,11 @@ scale = Vector2(9.6875, 9.6875)
 sprite_frames = SubResource("SpriteFrames_86ark")
 animation = &"side"
 
-[node name="Dashbox" type="Area2D" parent="." groups=["player"]]
+[node name="Dashbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dashbox"]
 position = Vector2(6.5, 1)
 shape = SubResource("RectangleShape2D_4672b")
 
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="body_entered" from="Dashbox" to="." method="_on_dashbox_body_entered"]

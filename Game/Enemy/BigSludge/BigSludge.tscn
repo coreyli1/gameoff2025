@@ -13,6 +13,7 @@ size = Vector2(44.375, 43.375)
 radius = 119.03781
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemies"]]
+scale = Vector2(4, 4)
 script = ExtResource("1_enwat")
 
 [node name="Hitbox" type="CollisionShape2D" parent="." groups=["enemies"]]

@@ -9,6 +9,7 @@ size = Vector2(16, 16)
 size = Vector2(16, 18)
 
 [node name="BreakableRock" type="StaticBody2D" groups=["environment"]]
+scale = Vector2(5, 5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_dcltl")

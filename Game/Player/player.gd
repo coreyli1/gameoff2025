@@ -53,7 +53,7 @@ func _process(_delta: float) -> void:
 	
 
 func _on_hurtbox_body_entered(body):
-
+	print("body entering player ", body)
 	if body.is_in_group("enemies"):  # make sure only enemies hurt player
 		var damage = body.get_node("EnemyStats").damage
 		take_damage(damage)
