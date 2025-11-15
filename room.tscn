@@ -10,7 +10,7 @@ size = Vector2(80.9375, 101.375)
 script = ExtResource("1_4o3f6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(1152, 483)
+position = Vector2(963.62494, 533)
 scale = Vector2(0.5725902, 0.51490384)
 texture = ExtResource("1_bisa2")
 
@@ -64,11 +64,10 @@ position = Vector2(1073, 20.99997)
 polygon = PackedVector2Array(355, -329, 352, -35, -241, -19, -207, 53, 451, 43, 451, -315)
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]
-position = Vector2(1663, 108)
+position = Vector2(1684, 86)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D4"]
-position = Vector2(18, -16)
-polygon = PackedVector2Array(-4, -15, 1, -8, -637, -4, -618, -73, 103, -55, 88, 329, -6, 365)
+polygon = PackedVector2Array(-1, 14, -24, 380, 72, 352, 82, -63, -643, -50, -652, 5, -1, 0)
 
 [connection signal="body_entered" from="WestDoor" to="." method="_on_west_door_body_entered"]
 [connection signal="body_entered" from="EastDoor" to="." method="_on_east_door_body_entered"]
