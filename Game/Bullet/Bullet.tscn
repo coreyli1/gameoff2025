@@ -10,6 +10,7 @@ size = Vector2(112, 42)
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_qratc")
+speed = 900.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(3.8146973e-06, -0.046512127)

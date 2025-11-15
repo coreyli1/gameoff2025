@@ -13,7 +13,7 @@ var active_rooms := {}
 # Current room ID
 var current_room: String
 
-var map = {}
+var room_map = {}
 
 enum level {
 	TUTORIAL,
@@ -29,21 +29,16 @@ var tutorial_map = {
 			"doors": ["","","r3","r2"],
 			"mobs":[],
 			"environment":[
-				["rock",500,400],
-				["rock",500,450],
+				["rock",500,150],				
+				["rock",500,250],
+				["rock",500,300],
+				["breakable_rock",500,400],
 				["rock",500,500],
 				["rock",500,550],
-				["rock",500,600],
-				["breakable_rock",500,650],
+				["rock",500,625],
 				["rock",500,700],
-				["rock",500,750],
-				["rock",500,800],
-				["rock",500,850],
-				["rock",500,900],
-				["rock",1500,900],
-				["rock",1450,900],
-				["rock",1450,900]
-				
+				["rock",500,775],
+				["rock",500,850]
 				],
 			"loot":[],
 			"map_sprite": ""
@@ -52,7 +47,40 @@ var tutorial_map = {
 		{
 			"doors": ["","r1","",""],
 			"mobs":[],
-			"environment":[],
+			"environment":[
+				["rock",1100,175],				
+				["rock",1100,250],
+				["rock",1100,325],
+				["rock",1100,400],
+				["rock",1100,475],
+				["rock",1100,550],
+				["rock",1100,625],
+				["rock",1100,700],
+				["rock",1100,775],
+				["rock",1100,850],
+				
+				["rock",1200,175],				
+				["rock",1200,250],
+				["rock",1200,325],
+				["rock",1200,400],
+				["rock",1200,475],
+				["rock",1200,550],
+				["rock",1200,625],
+				["rock",1200,700],
+				["rock",1200,775],
+				["rock",1200,850],
+				
+				["rock",1300,175],				
+				["rock",1300,250],
+				["rock",1300,325],
+				["rock",1300,400],
+				["rock",1300,475],
+				["rock",1300,550],
+				["rock",1300,625],
+				["rock",1300,700],
+				["rock",1300,775],
+				["rock",1300,850],
+			],
 			"loot":[],
 			"map_sprite": ""
 		},
@@ -61,16 +89,20 @@ var tutorial_map = {
 			"doors": ["r1","r4","",""],
 			"mobs":[
 				["basic",400,500],
-				["basic",300,500]
+				["basic",300,900]
 				],
-			"environment":[],
+			"environment":[
+				
+			],
 			"loot":[],
 			"map_sprite": ""
 		},
 	"r4": 
 		{
 			"doors": ["","","r5","r3"],
-			"mobs":[],
+			"mobs":[
+				
+			],
 			"environment":[],
 			"loot":[],
 			"map_sprite": ""
@@ -78,15 +110,24 @@ var tutorial_map = {
 	"r5": 
 		{
 			"doors": ["r4","","r6",""],
-			"mobs":[],
+			"mobs":[
+				
+			],
 			"environment":[],
 			"loot":[],
 			"map_sprite": ""
 		},
 	"r6": 
 		{
-			"doors": ["r6","","",""],
-			"mobs":[],
+			"doors": ["r5","","",""],
+			"mobs":[
+				["basic",800,500],
+				["basic",1000,900],		
+				["big",660,500],
+				["basic",1000,550],
+				["big",400,500],
+				["basic",1500,600]			
+			],
 			"environment":[],
 			"loot":[],
 			"map_sprite": ""
@@ -97,36 +138,14 @@ var tutorial_map = {
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# choose which map to load
-	#map_key(level.TUTORIAL)
-
-	# create and cache all room instances (but don't add them to tree yet)
-	#load_map(map)
-
-	# pick the starting room id (r1 by default)
-	#current_room = "r1"
-
-	# add initial room to the scene *after* _ready finishes to avoid nested tree changes
-	#call_deferred("_add_initial_room")
 	pass
-
-func _add_initial_room() -> void:
-	if not active_rooms.has(current_room):
-		push_error("Starting room not found: %s" % current_room)
-		return
-
-	add_child(active_rooms[current_room])
-	# ensure the room performs one-time setup (spawns env/mobs)
-	if active_rooms[current_room].has_method("setup_room"):
-		active_rooms[current_room].setup_room()
-	
 
 
 func setup(player_ref: CharacterBody2D, container_ref: Node2D):
 	player = player_ref
 	room_container = container_ref
 	map_key(0)
-	load_map(map)
+	load_map(room_map)
 	# By default, show first room
 	current_room = "r1"
 	_show_room(current_room)
@@ -136,7 +155,7 @@ func setup(player_ref: CharacterBody2D, container_ref: Node2D):
 func map_key(key):
 	match key:
 		level.TUTORIAL:
-			map = tutorial_map
+			room_map = tutorial_map
 			
 			
 func load_map(map):

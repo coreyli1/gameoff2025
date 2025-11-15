@@ -194,5 +194,5 @@ func take_damage(damage) -> void:
 
 
 func _on_dashbox_body_entered(body: Node2D) -> void:
-	if is_dashing and body.is_in_group("rocks"):
+	if is_dashing and body.is_in_group("breakable"):
 		body.queue_free()

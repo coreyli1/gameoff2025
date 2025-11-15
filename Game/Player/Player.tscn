@@ -106,6 +106,7 @@ size = Vector2(159, 160)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 1
+scale = Vector2(0.8, 0.8)
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_3qydi")

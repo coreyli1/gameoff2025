@@ -37,6 +37,35 @@ func spawn_environment():
 		to_add.position = Vector2(x,y)
 
 		add_child(to_add)
+	# spawning rocks in doors if it doesn't have a rock
+	if not northdoor:
+		var x = 900
+		for i in 3:
+			var to_add = get_environment_type("rock").instantiate()
+			to_add.position = Vector2(x,100)
+			add_child(to_add)
+			x+=50
+	if not eastdoor:
+		var y = 500
+		for i in 3:
+			var to_add = get_environment_type("rock").instantiate()
+			to_add.position = Vector2(1650,y)
+			add_child(to_add)
+			y +=50
+	if not southdoor:
+		var x = 900
+		for i in 3:
+			var to_add = get_environment_type("rock").instantiate()
+			to_add.position = Vector2(x,900)
+			add_child(to_add)
+			x+=50
+	if not westdoor:
+		var y = 500
+		for i in 3:
+			var to_add = get_environment_type("rock").instantiate()
+			to_add.position = Vector2(250,y)
+			add_child(to_add)
+			y +=50
 		
 func spawn_mobs():
 	for mob in mobs:

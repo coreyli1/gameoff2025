@@ -8,7 +8,7 @@ size = Vector2(16, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l8rqu"]
 size = Vector2(16, 18)
 
-[node name="BreakableRock" type="StaticBody2D" groups=["environment"]]
+[node name="BreakableRock" type="StaticBody2D" groups=["breakable", "environment"]]
 scale = Vector2(5, 5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
