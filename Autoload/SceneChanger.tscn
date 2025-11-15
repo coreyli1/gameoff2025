@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://do8kvplpg71e5"]
-
-[ext_resource type="Script" uid="uid://2p3umyhew2mf" path="res://Autoload/SceneChanger.gd" id="1_ltdnr"]
-
-[node name="SceneChanger" type="CanvasLayer"]
-layer = 100
-script = ExtResource("1_ltdnr")

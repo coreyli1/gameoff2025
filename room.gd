@@ -77,7 +77,7 @@ func spawn_mobs():
 		add_child(to_add)
 
 func _on_west_door_body_entered(body: Node2D) -> void:
-	print("west door entered, we are in current room", LevelManager.current_room)
+
 	if body.is_in_group("player"):
 		if westdoor:
 			print(westdoor)
@@ -86,7 +86,7 @@ func _on_west_door_body_entered(body: Node2D) -> void:
 			LevelManager.switch_rooms("west",westdoor)			
 
 func _on_east_door_body_entered(body: Node2D) -> void:
-	print("east door entered, we are in current room", LevelManager.current_room)
+
 	
 	if body.is_in_group("player"):
 		if eastdoor:
@@ -95,7 +95,7 @@ func _on_east_door_body_entered(body: Node2D) -> void:
 			LevelManager.switch_rooms("east",eastdoor)			
 
 func _on_north_door_body_entered(body: Node2D) -> void:
-	print("north door entered, we are in current room", LevelManager.current_room)
+
 	if body.is_in_group("player"):
 		if northdoor:
 			print(northdoor)
@@ -103,7 +103,7 @@ func _on_north_door_body_entered(body: Node2D) -> void:
 			LevelManager.switch_rooms("north",northdoor)				
 
 func _on_south_door_body_entered(body: Node2D) -> void:
-	print("south door entered, we are in current room", LevelManager.current_room)
+
 	if body.is_in_group("player"):
 		if southdoor:
 			print(southdoor)
@@ -131,6 +131,12 @@ func get_environment_type(type):
 		"breakable_rock":
 			print(type)			
 			return preload("res://Game/Environment/breakable_rock.tscn")
+		"stair":
+			print(type)
+			return preload("res://Game/Environment/stair.tscn")
+		"gamma":
+			print(type)
+			return preload("res://Game/Environment/gamma.tscn")
 
 
 func pause_room():

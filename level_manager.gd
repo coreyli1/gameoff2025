@@ -21,19 +21,19 @@ enum level {
 	TWO
 }
 
+var tutorial_map = {}
 
 # doors = [n, e, s, w]
-var tutorial_map = {
+var level_one = {
 	"r1": 
 		{
 			"doors": ["","","r3","r2"],
 			"mobs":[],
 			"environment":[
 				["rock",500,150],				
-				["rock",500,250],
+				["rock",500,200],
 				["rock",500,300],
 				["breakable_rock",500,400],
-				["rock",500,500],
 				["rock",500,550],
 				["rock",500,625],
 				["rock",500,700],
@@ -119,7 +119,7 @@ var tutorial_map = {
 		},
 	"r6": 
 		{
-			"doors": ["r5","","",""],
+			"doors": ["r5","","r7",""],
 			"mobs":[
 				["basic",800,500],
 				["basic",1000,900],		
@@ -131,10 +131,63 @@ var tutorial_map = {
 			"environment":[],
 			"loot":[],
 			"map_sprite": ""
+		},
+	"r7":
+		{
+			"doors": ["r6","","",""],
+			"mobs":[	
+			],
+			"environment":[
+				["stair",950, 500]
+			],
+			"loot":[],
+			"map_sprite": ""			
 		}
+	
 }
 	
-
+var level_two = {
+	"r1": 
+		{
+			"doors": ["r3","","r2",""],
+			"mobs":[],
+			"environment":[
+				["rock",700,150],				
+				["rock",700,200],
+				["rock",700,300],
+				["rock",700,400],
+				["rock",700,550],
+				["rock",700,625],
+				["rock",700,700],
+				["rock",700,775],
+				["rock",700,850]
+				],
+			"loot":[],
+			"map_sprite": ""
+		},
+	"r2": 
+		{
+			"doors": ["","","r1",""],
+			"mobs":[],
+			"environment":[
+			],
+			"loot":[],
+			"map_sprite": ""
+		},
+	"r3": 
+		{
+			"doors": ["r1","r4","",""],
+			"mobs":[
+				["basic",400,500],
+				["basic",300,900]
+				],
+			"environment":[
+				
+			],
+			"loot":[],
+			"map_sprite": ""
+		}
+}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -144,7 +197,7 @@ func _ready() -> void:
 func setup(player_ref: CharacterBody2D, container_ref: Node2D):
 	player = player_ref
 	room_container = container_ref
-	map_key(0)
+	map_key(1)
 	load_map(room_map)
 	# By default, show first room
 	current_room = "r1"
@@ -156,6 +209,10 @@ func map_key(key):
 	match key:
 		level.TUTORIAL:
 			room_map = tutorial_map
+		level.ONE: 
+			room_map = level_one
+		level.TWO:
+			room_map = level_two
 			
 			
 func load_map(map):
@@ -221,7 +278,7 @@ func position_player(door):
 		"east":
 			player.position = Vector2(350,550)
 		"south":
-			player.position = Vector2(931,200)
+			player.position = Vector2(931,150)
 		"west":
 			player.position = Vector2(1500,531)
 	
@@ -263,3 +320,9 @@ func _show_room(room_id: String) -> void:
 		active_rooms[room_id].resume_room()
 		for child in active_rooms[room_id].get_children():
 			child.visible = true
+
+
+func switch_levels():
+	#remove level 1
+	#spawn level 2
+	pass

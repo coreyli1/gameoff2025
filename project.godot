@@ -11,13 +11,12 @@ config_version=5
 [application]
 
 config/name="lightboxhead"
-run/main_scene="uid://dxkhwqh08vj0y"
+run/main_scene="uid://3vxaxsr4y6pn"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Util="*res://Game/Maps/Util.gd"
 SceneChanger="*res://Autoload/SceneChanger.tscn"
 PlayerStats="*res://Autoload/PlayerStats.gd"
 PlayerUi="*res://UIs/PlayerUI/PlayerUI.tscn"

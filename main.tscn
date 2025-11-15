@@ -9,7 +9,6 @@ script = ExtResource("1_h2yge")
 
 [node name="Player" parent="." instance=ExtResource("2_h2yge")]
 position = Vector2(900, 528)
-dash_speed = 1600.0
 
 [node name="RoomContainer" type="Node2D" parent="."]
 script = ExtResource("3_h2yge")
