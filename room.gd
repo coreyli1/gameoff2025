@@ -115,10 +115,11 @@ func pause_room():
 					shape.set_deferred("disabled", true)
 					
 	for item in get_tree().get_nodes_in_group("environment"):
-		if item.is_inside_tree():
+		if item.is_inside_tree() and is_ancestor_of(item):
 			for shape in item.get_children():
 				if shape is CollisionShape2D:
-					shape.set_deferred("disabled", true)
+					print(shape)
+					disable_all_shapes(item, true)
 					
 	for child in get_children():
 		if child.has_signal("body_entered"):
@@ -133,10 +134,11 @@ func resume_room():
 			mob.set_physics_process(true)
 			for shape in mob.get_children():
 				if shape is CollisionShape2D:
+					print(shape)
 					shape.set_deferred("disabled", false)
 					
 	for item in get_tree().get_nodes_in_group("environment"):
-		if item.is_inside_tree():
+		if item.is_inside_tree() and is_ancestor_of(item):
 			for shape in item.get_children():
 				if shape is CollisionShape2D:
 					shape.set_deferred("disabled", false)
@@ -145,5 +147,11 @@ func resume_room():
 		if child.has_signal("body_entered"):
 			print(child.get_child(0))
 			child.get_child(0).set_deferred("disabled", false)
-		
+
+
+func disable_all_shapes(node: Node, disabled: bool):
+	for child in node.get_children():
+		if child is CollisionShape2D:
+			child.set_deferred("disabled", disabled)
+		disable_all_shapes(child, disabled) # recurse
 		
