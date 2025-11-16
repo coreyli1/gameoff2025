@@ -13,5 +13,6 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	#activate level manager script to go to next level
-	print("stair has received ",body)
-	pass # Replace with function body.
+	if body.is_in_group("player"):
+		print("stair has received ",body)
+		LevelManager.switch_levels(2)

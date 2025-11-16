@@ -322,7 +322,21 @@ func _show_room(room_id: String) -> void:
 			child.visible = true
 
 
-func switch_levels():
+func switch_levels(level):
 	#remove level 1
-	#spawn level 2
+	#spawn level 2	
+	#we know how to remove and switch rooms
+	#no we need to do that with levels
+	#we switch levels when we load a new map
+	print("switching to level ", level)
+	for r in room_container.get_children():
+		r.queue_free()
+	
+	map_key(level)
+	load_map(room_map)
+	current_room = "r1"
+	_show_room(current_room)
+	
+	print(room_map)
+	
 	pass
