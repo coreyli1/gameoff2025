@@ -125,6 +125,9 @@ func get_mob_type(type):
 		"shooter":
 			print(type)			
 			return preload("res://Game/Enemy/ShooterSludge/ShooterSludge.tscn")
+		"boss":
+			print(type)
+			return preload("res://Game/Enemy/BossSludge/BossSludge.tscn")
 
 
 func get_environment_type(type):

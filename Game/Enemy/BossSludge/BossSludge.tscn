@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://brpanm2gdho2n"]
+
+[ext_resource type="Script" uid="uid://b0dynvcxve7w1" path="res://Game/Enemy/BossSludge/BossSludge.gd" id="1_pvfmg"]
+[ext_resource type="Texture2D" uid="uid://x5r3wj8qry7k" path="res://Assets/enemy.png" id="2_6grbt"]
+[ext_resource type="Script" uid="uid://f01h6ibumxcy" path="res://Game/Enemy/EnemyComponents/EnemyStats.gd" id="3_hcyxm"]
+[ext_resource type="Script" uid="uid://bdkxlykgahewb" path="res://Game/Enemy/EnemyComponents/ShooterBehavior.gd" id="4_he67h"]
+[ext_resource type="PackedScene" uid="uid://dp0jb3a6o7cgd" path="res://Game/Bullet/EnemyBullet.tscn" id="5_uff02"]
+[ext_resource type="Script" uid="uid://b6d47qh0g0tvr" path="res://Game/Enemy/EnemyComponents/WanderBehavior.gd" id="6_5ypek"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_epr5s"]
+size = Vector2(186, 185)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_83l4y"]
+radius = 101.677185
+
+[node name="BossSludge" type="CharacterBody2D" groups=["enemies"]]
+script = ExtResource("1_pvfmg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(7.6293945e-06, -1)
+scale = Vector2(2.9174805, 2.9174805)
+texture = ExtResource("2_6grbt")
+
+[node name="Hitbox" type="CollisionShape2D" parent="." groups=["enemies"]]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_epr5s")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+position = Vector2(1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+position = Vector2(2, 0)
+scale = Vector2(4, 4)
+shape = SubResource("CircleShape2D_83l4y")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="EnemyStats" type="Node" parent="."]
+script = ExtResource("3_hcyxm")
+max_health = 10
+metadata/_custom_type_script = "uid://f01h6ibumxcy"
+
+[node name="ShooterBehavior" type="Node" parent="."]
+script = ExtResource("4_he67h")
+bullet_scene = ExtResource("5_uff02")
+metadata/_custom_type_script = "uid://bdkxlykgahewb"
+
+[node name="WanderBehavior" type="Node" parent="."]
+script = ExtResource("6_5ypek")
+metadata/_custom_type_script = "uid://b6d47qh0g0tvr"
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_zone_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_zone_body_exited"]

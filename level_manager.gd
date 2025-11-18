@@ -219,18 +219,18 @@ var level_two = {
 			"loot":[],
 			"map_sprite": ""
 		},	
-#	"boss": 
-	#	{
-	#		"doors": ["","","","r3"],
-	#		"mobs":[
-	#			["basic",900,900],
-	#			],
-	#		"environment":[
-	#			
-	#		],
-	#		"loot":[],
-	#		"map_sprite": ""
-	#	},
+	"boss": 
+		{
+			"doors": ["","","","r3"],
+			"mobs":[
+				["boss",900,500],
+				],
+			"environment":[
+				
+			],
+			"loot":[],
+			"map_sprite": ""
+		},
 }
 
 # Called when the node enters the scene tree for the first time.
@@ -241,7 +241,7 @@ func _ready() -> void:
 func setup(player_ref: CharacterBody2D, container_ref: Node2D):
 	player = player_ref
 	room_container = container_ref
-	map_key(1)
+	map_key(2)
 	load_map(room_map)
 	# By default, show first room
 	current_room = "r1"
@@ -340,7 +340,12 @@ func switch_rooms(entry_door: String, next_room: String ) -> void:
 	if not active_rooms.has(next_room):
 		push_error("Room ID not found: %s" % next_room)
 		return
+		
+		
+		
 	disable_all_doors()
+	
+	
 	# Hide current room
 	if active_rooms.has(current_room):
 		active_rooms[current_room].visible = false
