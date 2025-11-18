@@ -37,6 +37,3 @@ func _on_body_exited(body: Node) -> void:
 func _on_enemy_died() -> void:
 	MobInformation.defeated_enemies.append(id)
 	queue_free()
-
-func _exit_tree():
-	print("mob REMOVED ", self)

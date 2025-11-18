@@ -33,7 +33,7 @@ var level_one = {
 				["rock",500,150],				
 				["rock",500,200],
 				["rock",500,300],
-				["breakable_rock",500,400],
+				["breakable_rock",500,440],
 				["rock",500,550],
 				["rock",500,625],
 				["rock",500,700],
@@ -88,8 +88,9 @@ var level_one = {
 		{
 			"doors": ["r1","r4","",""],
 			"mobs":[
-				["basic",400,500],
-				["basic",300,900]
+				["basic",1050,550],
+				["basic",1150,750],
+				["basic",1300,650]
 				],
 			"environment":[
 				
@@ -119,14 +120,13 @@ var level_one = {
 		},
 	"r6": 
 		{
-			"doors": ["r5","","r7",""],
+			"doors": ["r5","","r7","r8"],
 			"mobs":[
 				["basic",800,500],
-				["basic",1000,900],		
-				["big",660,500],
+				["big",1000,900],		
+				["basic",660,500],
 				["basic",1000,550],
-				["big",400,500],
-				["basic",1500,600]			
+				["big",1500,600]			
 			],
 			"environment":[],
 			"loot":[],
@@ -142,6 +142,16 @@ var level_one = {
 			],
 			"loot":[],
 			"map_sprite": ""			
+		},
+	"r8":
+		{
+			"doors": ["","r6","",""],
+			"mobs":[	
+			],
+			"environment":[
+			],
+			"loot":[],
+			"map_sprite": ""			
 		}
 	
 }
@@ -149,7 +159,7 @@ var level_one = {
 var level_two = {
 	"r1": 
 		{
-			"doors": ["r3","","r2",""],
+			"doors": ["r3","r4","r2","r5"],
 			"mobs":[],
 			"environment":[
 				["rock",700,150],				
@@ -167,7 +177,7 @@ var level_two = {
 		},
 	"r2": 
 		{
-			"doors": ["","","r1",""],
+			"doors": ["r1","","",""],
 			"mobs":[],
 			"environment":[
 			],
@@ -176,7 +186,7 @@ var level_two = {
 		},
 	"r3": 
 		{
-			"doors": ["r1","r4","",""],
+			"doors": ["","boss","r1",""],
 			"mobs":[
 				["basic",400,500],
 				["basic",300,900]
@@ -186,7 +196,41 @@ var level_two = {
 			],
 			"loot":[],
 			"map_sprite": ""
-		}
+		},
+	"r4": 
+		{
+			"doors": ["","","","r1"],
+			"mobs":[
+				],
+			"environment":[
+				["rock",700,800],
+				],
+			"loot":[],
+			"map_sprite": ""
+		},	
+	"r5": 
+		{
+			"doors": ["","r1","",""],
+			"mobs":[
+				],
+			"environment":[
+				["rock",700,800],
+				],
+			"loot":[],
+			"map_sprite": ""
+		},	
+#	"boss": 
+	#	{
+	#		"doors": ["","","","r3"],
+	#		"mobs":[
+	#			["basic",900,900],
+	#			],
+	#		"environment":[
+	#			
+	#		],
+	#		"loot":[],
+	#		"map_sprite": ""
+	#	},
 }
 
 # Called when the node enters the scene tree for the first time.
@@ -243,7 +287,8 @@ func load_map(map):
 		print(room_map.map_sprite)
 		room.map_sprite = room_map.map_sprite
 		
-		room_container.add_child(room)		
+		#room_container.add_child(room)
+		room_container.call_deferred("add_child", room)
 		active_rooms[r] = room
 
 	
@@ -285,58 +330,77 @@ func position_player(door):
 			
 
 func switch_rooms(entry_door: String, next_room: String ) -> void:
-	print("switch rooms")
-	print(current_room)
-	print(active_rooms[current_room].westdoor)
-	print(active_rooms[current_room].eastdoor)
-	print(active_rooms[current_room].southdoor)
-	print(active_rooms[current_room].northdoor)
+	print("switch rooms ", current_room)
+	print("west ", active_rooms[current_room].westdoor)
+	print("east ", active_rooms[current_room].eastdoor)
+	print("south ", active_rooms[current_room].southdoor)
+	print("north ", active_rooms[current_room].northdoor)
+	
+	
 	if not active_rooms.has(next_room):
 		push_error("Room ID not found: %s" % next_room)
 		return
-	''
+	disable_all_doors()
 	# Hide current room
 	if active_rooms.has(current_room):
 		active_rooms[current_room].visible = false
 		active_rooms[current_room].pause_room()
+
 	
-	# Show new room
-	current_room = next_room
-	_show_room(current_room)
+
 	
 	# Position player at the door used
-	position_player(entry_door)
+	position_player(entry_door)	
+	
+	# Show new room
+	current_room = next_room	
+	call_deferred("_show_room", current_room)
+	
+	await get_tree().create_timer(0.3).timeout
+	enable_room_doors(current_room)
+	
+	
 
 # Show a room
 func _show_room(room_id: String) -> void:	
-	print("show room")
-	print(room_id)
-	print(active_rooms[room_id].westdoor)
-	print(active_rooms[room_id].eastdoor)
-	print(active_rooms[room_id].southdoor)
-	print(active_rooms[room_id].northdoor)
+	print("show room: ", room_id)
+	print("west ", active_rooms[room_id].westdoor)
+	print("east ", active_rooms[room_id].eastdoor)
+	print("south ", active_rooms[room_id].southdoor)
+	print("north ", active_rooms[room_id].northdoor)
 	if active_rooms.has(room_id):
 		active_rooms[room_id].visible = true
-		active_rooms[room_id].resume_room()
+		active_rooms[room_id].call_deferred("resume_room")
 		for child in active_rooms[room_id].get_children():
 			child.visible = true
 
 
-func switch_levels(level):
-	#remove level 1
-	#spawn level 2	
-	#we know how to remove and switch rooms
-	#no we need to do that with levels
-	#we switch levels when we load a new map
-	print("switching to level ", level)
+func switch_levels(l):
+	print("switching to level ", l)
 	for r in room_container.get_children():
 		r.queue_free()
 	
-	map_key(level)
+	#clear active rooms for the next level
+	active_rooms = {}
+	
+	map_key(l)
 	load_map(room_map)
 	current_room = "r1"
 	_show_room(current_room)
 	
-	print(room_map)
+	print("active rooms ", active_rooms)
 	
 	pass
+
+func disable_all_doors():
+	for room_id in active_rooms:
+		var room = active_rooms[room_id]
+		for child in room.get_children():
+			if child is Area2D and "Door" in child.name:
+				child.monitoring = false
+
+func enable_room_doors(room_id: String):
+	var room = active_rooms[room_id]
+	for child in room.get_children():
+		if child is Area2D and "Door" in child.name:
+			child.monitoring = true

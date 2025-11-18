@@ -35,5 +35,4 @@ func _on_body_exited(body: Node) -> void:
 		state = "wander"
 
 func _on_enemy_died() -> void:
-	MobInformation.defeated_enemies.append(id)
 	queue_free()
