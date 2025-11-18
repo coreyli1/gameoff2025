@@ -3,17 +3,17 @@
 [ext_resource type="Script" uid="uid://cebaaqk43atea" path="res://Game/Bullet/enemy_bullet.gd" id="1_00ld7"]
 [ext_resource type="Texture2D" uid="uid://bw61j1i0un2pd" path="res://Assets/enemybullet.png" id="1_qu04x"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v7qj8"]
-size = Vector2(13, 12)
+[sub_resource type="CircleShape2D" id="CircleShape2D_00ld7"]
+radius = 24.351591
 
 [node name="EnemyBullet" type="Area2D"]
 script = ExtResource("1_00ld7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-0.375, -2.842171e-14)
-scale = Vector2(0.20703125, 0.1875)
+position = Vector2(3.8146973e-06, 0)
+scale = Vector2(0.76953125, 0.696934)
 texture = ExtResource("1_qu04x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 4.7683716e-07)
-shape = SubResource("RectangleShape2D_v7qj8")
+position = Vector2(-2, 1)
+shape = SubResource("CircleShape2D_00ld7")
