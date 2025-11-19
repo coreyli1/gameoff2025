@@ -27,10 +27,14 @@ func _ready() -> void:
 	detection_area.connect("body_exited", Callable(self, "_on_body_exited"))
 	stats.connect("died", Callable(self, "_on_enemy_died"))
 	
+		
+	
 	# Connect behavior signals
 	charge.connect("charge_hit_wall", Callable(self, "_on_charge_hit_wall"))
 	charge.connect("charge_started", Callable(self, "_on_charge_started"))
 	pattern_shoot.connect("shooting_complete", Callable(self, "_on_shooting_complete"))
+	
+	
 
 func _physics_process(delta: float) -> void:
 	if not is_physics_processing():
@@ -106,7 +110,13 @@ func _on_body_exited(body: Node) -> void:
 
 func _on_enemy_died() -> void:
 	print("BOSS DEFEATED!")
+	
+	var room = get_parent()
+	if room and room.has_method("on_boss_defeated"):
+		room.on_boss_defeated()
+	
 	queue_free()
+	# send signal to either the room its in or the level manager that says good bye
 
 func flash_sprite() -> void:
 	var original = modulate

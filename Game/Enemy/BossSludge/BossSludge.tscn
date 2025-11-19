@@ -38,8 +38,8 @@ shape = SubResource("CircleShape2D_83l4y")
 
 [node name="EnemyStats" type="Node" parent="."]
 script = ExtResource("3_hcyxm")
-max_health = 20
-speed = 100.0
+max_health = 10
+speed = 300.0
 metadata/_custom_type_script = "uid://f01h6ibumxcy"
 
 [node name="WanderBehavior" type="Node" parent="."]
@@ -58,7 +58,10 @@ metadata/_custom_type_script = "uid://rg6878wgdelj"
 
 [node name="ChargeBehavior" type="Node" parent="."]
 script = ExtResource("8_pcoj8")
-telegraph_duration = 0.25
+charge_speed_max = 800.0
+charge_speed_min = 200.0
+acceleration = 1100.0
+telegraph_duration = 0.1
 metadata/_custom_type_script = "uid://bfjxxgqhfdkhm"
 
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_zone_body_entered"]

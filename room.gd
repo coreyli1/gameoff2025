@@ -12,6 +12,7 @@ var loot = []
 var map_sprite : String
 var initialized := false
 
+var room_name
 
 
 # Called when the node enters the scene tree for the first time.
@@ -36,50 +37,33 @@ func spawn_environment():
 		var y = item[2]
 		to_add.position = Vector2(x,y)
 		add_child(to_add)
-		#call_deferred("add_child", to_add)
+		
+	if not room_name == "boss":
 	# spawning rocks in doors if it doesn't have a rock
-	if not northdoor:
-		var x = 900
-		for i in 3:
-			var to_add = get_environment_type("rock").instantiate()
-			to_add.position = Vector2(x,100)
-			add_child(to_add)
-			#call_deferred("add_child", to_add)
-			x+=50
-	if not eastdoor:
-		var y = 500
-		for i in 3:
-			var to_add = get_environment_type("rock").instantiate()
-			to_add.position = Vector2(1650,y)
-			add_child(to_add)
-			#call_deferred("add_child", to_add)
-			y +=50
-	if not southdoor:
-		var x = 900
-		for i in 3:
-			var to_add = get_environment_type("rock").instantiate()
-			to_add.position = Vector2(x,900)
-			add_child(to_add)
-			#call_deferred("add_child", to_add)
-			x+=50
-	if not westdoor:
-		var y = 500
-		for i in 3:
-			var to_add = get_environment_type("rock").instantiate()
-			to_add.position = Vector2(250,y)
-			add_child(to_add)
-			#call_deferred("add_child", to_add)
-			y +=50
+		if not northdoor:
+			spawn_door_blocks("not north")
+		if not eastdoor:
+			spawn_door_blocks("not east")
+		if not southdoor:
+			spawn_door_blocks("not south")
+		if not westdoor:
+			spawn_door_blocks("not west")
+
+	else:
+		#if you're in a boss level, spawn blocks for all the doors
+		spawn_door_blocks("not north")
+		spawn_door_blocks("not east")
+		spawn_door_blocks("not south")
+		spawn_door_blocks("not west")
 		
 func spawn_mobs():
 	for mob in mobs:
 		var to_add = get_mob_type(mob[0]).instantiate()
 		var x = mob[1]
 		var y = mob[2]
-		to_add.position = Vector2(x,y)
-		
+		to_add.position = Vector2(x,y)	
 		add_child(to_add)
-		#call_deferred("add_child", to_add)
+
 func _on_west_door_body_entered(body: Node2D) -> void:
 
 	# how do i prevent DOUBLE JUMPING??? need to remove collision or need to wait some how or need to move player right away?
@@ -196,4 +180,92 @@ func disable_all_shapes(node: Node, disabled: bool):
 		if child is CollisionShape2D:
 			child.set_deferred("disabled", disabled)
 		disable_all_shapes(child, disabled) # recurse
-		
+
+func spawn_door_blocks(direction):
+	match direction:
+		"not north":
+			var x = 900
+			for i in 3:
+				var to_add = get_environment_type("rock").instantiate()
+				to_add.position = Vector2(x,100)
+				add_child(to_add)
+				x+=50
+		"not east":
+			var y = 500
+			for i in 3:
+				var to_add = get_environment_type("rock").instantiate()
+				to_add.position = Vector2(1650,y)
+				add_child(to_add)
+				y +=50
+		"not south":
+			var x = 900
+			for i in 3:
+				var to_add = get_environment_type("rock").instantiate()
+				to_add.position = Vector2(x,900)
+				add_child(to_add)
+				x+=50
+		"not west":
+			var y = 500
+			for i in 3:
+				var to_add = get_environment_type("rock").instantiate()
+				to_add.position = Vector2(250,y)
+				add_child(to_add)
+				y+=50
+func despawn_door_blocks(direction):
+	match direction:
+		"not north":
+			var x = 900
+			for i in 3:
+				
+				var pos = Vector2(x,100)
+				#if there is a rock in this position 
+				for child in get_children():
+					if child.position == pos:
+						child.queue_free()
+
+				x+=50
+		"not east":
+			var y = 500
+			for i in 3:
+				
+				var pos = Vector2(1650,y)
+				for child in get_children():
+					if child.position == pos:
+						child.queue_free()
+				y +=50
+		"not south":
+			var x = 900
+			for i in 3:
+				
+				
+				var pos = Vector2(x,900)
+				for child in get_children():
+					if child.position == pos:
+						child.queue_free()
+
+
+				x+=50
+		"not west":
+			var y = 500 
+			for i in 3:
+				
+				var pos = Vector2(250,y)
+				for child in get_children():
+					if child.position == pos:
+						child.queue_free()
+
+				y+=50
+
+func on_boss_defeated():
+	print("boss defeated")
+	#unlock room based on the room configuration
+	if northdoor:
+		despawn_door_blocks("not north")
+	if eastdoor:
+		despawn_door_blocks("not east")
+	if southdoor:
+		despawn_door_blocks("not south")
+	if westdoor:
+		despawn_door_blocks("not west")
+
+	

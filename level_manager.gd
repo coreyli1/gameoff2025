@@ -266,6 +266,7 @@ func load_map(map):
 		
 		var room = preload("res://room.tscn").instantiate()
 		room.visible = false
+		room.room_name = r
 		#create room
 		#create doors and attach them
 		#create mobs
