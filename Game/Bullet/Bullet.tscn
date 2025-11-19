@@ -4,18 +4,17 @@
 [ext_resource type="Texture2D" uid="uid://dpt8xdhg42bfb" path="res://Assets/bullet.png" id="2_v7qj8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7qj8"]
-size = Vector2(112, 42)
+size = Vector2(103, 31)
 
 [node name="Bullet" type="Area2D"]
-collision_layer = 3
-collision_mask = 3
 script = ExtResource("1_qratc")
 speed = 1000.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(3.8146973e-06, -0.046512127)
-scale = Vector2(1.75, 0.65116286)
+position = Vector2(-2.4999967, -0.046512127)
+scale = Vector2(1.671875, 0.65116286)
 texture = ExtResource("2_v7qj8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -0.5)
 shape = SubResource("RectangleShape2D_v7qj8")
