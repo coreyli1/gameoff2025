@@ -13,6 +13,9 @@ var active_rooms := {}
 # Current room ID
 var current_room: String
 
+# Current level
+var current_level: String
+
 var room_map = {}
 
 enum level {
@@ -253,10 +256,13 @@ func map_key(key):
 	match key:
 		level.TUTORIAL:
 			room_map = tutorial_map
+			current_level = "Tutorial"
 		level.ONE: 
 			room_map = level_one
+			current_level = "One"			
 		level.TWO:
 			room_map = level_two
+			current_level = "Two"
 			
 			
 func load_map(map):
@@ -379,6 +385,8 @@ func _show_room(room_id: String) -> void:
 		active_rooms[room_id].call_deferred("resume_room")
 		for child in active_rooms[room_id].get_children():
 			child.visible = true
+			
+	PlayerUI.update_levelroom(current_level, current_room)
 
 
 func switch_levels(l):

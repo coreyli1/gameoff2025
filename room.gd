@@ -20,6 +20,7 @@ func _ready() -> void:
 	setup_room()
 	pass
 
+
 func setup_room():
 	if initialized:
 		return

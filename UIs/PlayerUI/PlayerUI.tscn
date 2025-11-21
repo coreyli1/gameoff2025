@@ -30,9 +30,18 @@ offset_bottom = -228.0
 text = "Health: 10"
 
 [node name="powerup" type="Label" parent="CanvasLayer/GridContainer/Panel"]
+visible = false
 layout_mode = 0
 offset_left = 1709.0
 offset_top = -215.0
 offset_right = 1826.0
 offset_bottom = -192.0
 text = "Light Ray: Visible Light"
+
+[node name="levelroom" type="Label" parent="CanvasLayer/GridContainer/Panel"]
+layout_mode = 0
+offset_left = 922.0
+offset_top = 359.0
+offset_right = 1021.0
+offset_bottom = 382.0
+text = "Level - Room"
