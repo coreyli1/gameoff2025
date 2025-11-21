@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://gypvwrb3lxb0" path="res://UIs/PlayerUI/PlayerUIScript.gd" id="2_7r5l3"]
 
-[node name="PlayerUi" type="Control"]
+[node name="PlayerUI" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,26 +11,28 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_7r5l3")
 
-[node name="GridContainer" type="GridContainer" parent="."]
-layout_mode = 0
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer"]
 offset_top = 449.0
 offset_bottom = 449.0
 
-[node name="Panel" type="Panel" parent="GridContainer"]
+[node name="Panel" type="Panel" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
 
-[node name="health" type="Label" parent="GridContainer/Panel"]
+[node name="health" type="Label" parent="CanvasLayer/GridContainer/Panel"]
 layout_mode = 0
-offset_left = 1.0
-offset_top = -6.0
-offset_right = 185.0
-offset_bottom = 43.0
+offset_left = 1709.0
+offset_top = -277.0
+offset_right = 1893.0
+offset_bottom = -228.0
 text = "Health: 10"
 
-[node name="powerup" type="Label" parent="GridContainer/Panel"]
+[node name="powerup" type="Label" parent="CanvasLayer/GridContainer/Panel"]
 layout_mode = 0
-offset_left = 244.0
-offset_top = -4.0
-offset_right = 361.0
-offset_bottom = 19.0
-text = "powerup: none"
+offset_left = 1709.0
+offset_top = -215.0
+offset_right = 1826.0
+offset_bottom = -192.0
+text = "Light Ray: Visible Light"

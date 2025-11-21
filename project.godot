@@ -18,7 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 PlayerStats="*res://Autoload/PlayerStats.gd"
-PlayerUi="*res://UIs/PlayerUI/PlayerUI.tscn"
+PlayerUI="*res://UIs/PlayerUI/PlayerUI.tscn"
 MobInformation="*res://Autoload/MobInfo.gd"
 LevelManager="*res://LevelManager.tscn"
 

@@ -16,7 +16,7 @@ func _on_body_entered(body: Node2D) -> void:
 		# if we do this then we give the player a gamma bullet
 		# it turns green and can destroy things
 		PlayerStats.bullet_color = Color.GREEN
-		PlayerUi.update_powerup("Gamma")
+		PlayerUI.update_powerup("Gamma")
 		queue_free()
 		pass
 	pass # Replace with function body.

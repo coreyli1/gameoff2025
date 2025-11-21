@@ -5,8 +5,8 @@ var powerup_label : Label
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 
-	health_label = $GridContainer/Panel/health
-	powerup_label = $GridContainer/Panel/powerup
+	health_label = $CanvasLayer/GridContainer/Panel/health
+	powerup_label = $CanvasLayer/GridContainer/Panel/powerup
 	
 	pass # Replace with function body.
 
@@ -16,9 +16,9 @@ func _process(delta: float) -> void:
 	pass
 
 
-func update_powerup(powerup):
-	powerup_label.text = "PowerUp: " + powerup
+func update_weapons(powerup):
+	powerup_label.text = "Light Ray: " + powerup
 
 func update_health(health):
+	print(health)
 	health_label.text = "Health: " + str(health)
-	pass

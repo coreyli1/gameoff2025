@@ -190,7 +190,7 @@ func take_damage(damage) -> void:
 	health -= damage
 	if health <= 0:
 		print("you died!")
-	PlayerUi.update_health(health)
+	PlayerUI.update_health(health)
 
 
 func _on_dashbox_body_entered(body: Node2D) -> void:
